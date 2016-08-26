@@ -44,7 +44,7 @@ public class ReportBolt extends BaseRichBolt {
 		BufferedWriter output;
 		List<String> keys = new ArrayList<String>();
 		try {
-			output = new BufferedWriter(new FileWriter("/home/ec2-user/pavan/out.txt", true));
+			output = new BufferedWriter(new FileWriter("/home/hadoop/out.txt", true));
 			keys.addAll(counts.keySet());
 			Collections.sort(keys);
 

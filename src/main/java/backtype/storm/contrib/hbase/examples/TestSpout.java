@@ -26,7 +26,7 @@ public class TestSpout implements IRichSpout {
       SpoutOutputCollector collector) {
     this._collector = collector;
     values = new ArrayList<Values>();
-    String csvFile = "C:/Users/pavankumarreddy/Desktop/combinvdel_209093_correction.csv" ; //"/Users/mkyong/csv/country.csv";
+    String csvFile = "/home/hadoop/combinvdel_209093_correction.csv" ; //"/Users/mkyong/csv/country.csv";
     String line = "";
     String cvsSplitBy = ",";
     

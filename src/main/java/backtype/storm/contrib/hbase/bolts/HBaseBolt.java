@@ -12,6 +12,7 @@ import backtype.storm.task.TopologyContext;
 import backtype.storm.topology.IRichBolt;
 import backtype.storm.topology.OutputFieldsDeclarer;
 import backtype.storm.tuple.Tuple;
+import backtype.storm.tuple.Fields;
 
 /**
  * A Storm bolt for putting data into HBase.
@@ -56,6 +57,7 @@ public class HBaseBolt implements IRichBolt {
   @Override
   public void execute(Tuple input) {
     try {
+       //	LOG.info("after Preparing HBaseBolt for table: input : " + input);
       this.connector.getTable().put(conf.getPutFromTuple(input));
     } catch (IOException ex) {
       throw new RuntimeException(ex);
@@ -75,6 +77,7 @@ public class HBaseBolt implements IRichBolt {
   /** {@inheritDoc} */
   @Override
   public void declareOutputFields(OutputFieldsDeclarer declarer) {
+	declarer.declare(new Fields("site_id", "inv_vol" ,"inv_tank", "date","refill","dispensed"));
   }
 
   /** {@inheritDoc} */

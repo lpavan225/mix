@@ -82,11 +82,13 @@ public class HBaseExampleTopology {
     config.addColumn("CF1", "refill");
     config.addColumn("CF1", "dispensed");
     
-    
+	 builder.setSpout("spout", new TestSpout(), 1);
+    builder.setBolt("hbase", new HBaseBolt(config), 1).shuffleGrouping("spout");    
    
     // Add HBaseBolt
-    builder.setBolt("hbase", new HBaseBolt(config), 1).shuffleGrouping(SENTENCE_SPOUT_ID);
-    builder.setBolt(REPORT_BOLT_ID, reportBolt).globalGrouping(SENTENCE_SPOUT_ID);
+	//	builder.setBolt(REPORT_BOLT_ID, reportBolt).shuffleGrouping(SENTENCE_SPOUT_ID);
+    // builder.setBolt("hbase", new HBaseBolt(config), 1).shuffleGrouping(SENTENCE_SPOUT_ID);
+    //builder.setBolt(REPORT_BOLT_ID, reportBolt).globalGrouping(SENTENCE_SPOUT_ID);
     System.out.println("inside topo");
     Config stormConf = new Config();
     stormConf.setDebug(true);
@@ -109,7 +111,7 @@ public class HBaseExampleTopology {
     cluster.shutdown();*/
   }
   private static KafkaSpout buildKafkaSentenceSpout() {
-	    String zkHostPort = "52.76.242.227:2181";
+	    String zkHostPort = "localhost:2181";
 	    String topic = "sentences";
 
 	    String zkRoot = "/acking-kafka-sentence-spout";

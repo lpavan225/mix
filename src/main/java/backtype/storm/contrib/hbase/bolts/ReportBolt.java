@@ -44,14 +44,14 @@ public class ReportBolt extends BaseRichBolt {
 		BufferedWriter output;
 		List<String> keys = new ArrayList<String>();
 		try {
-			output = new BufferedWriter(new FileWriter("/home/ec2-user/pavan/out.txt", true));
+			output = new BufferedWriter(new FileWriter("/home/hadoop/hbaseOut.txt", true));
 			keys.addAll(counts.keySet());
 			Collections.sort(keys);
 
 			for (String key : keys) {
 				System.out.println(key + " : " + counts.get(key));
 				output.newLine();
-				output.append(key + " : " + counts.get(key));
+				output.append(key);
 			}
 			output.close();
 			System.out.println("--------------");
