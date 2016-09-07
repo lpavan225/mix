@@ -132,7 +132,7 @@ public class DifferentTopicsTopology {
 		// fuel Data
 		builder.setSpout(FUEL_PRICES_SPOUT, fuelPriceSpout, 1);
 		builder.setBolt("processFuelPrice", new ProcessFuelPriceBolt()).shuffleGrouping(FUEL_PRICES_SPOUT);
-		builder.setBolt("fuelPrice", new HBaseBolt(holidayConfig), 1).fieldsGrouping("processFuelPrice",new Fields("shortid","Datestr","Fuel_Price","State"));
+		builder.setBolt("fuelPrice", new HBaseBolt(fuelPricesConfig), 1).fieldsGrouping("processFuelPrice",new Fields("shortid","Datestr","Fuel_Price","State"));
 						
 		Config cfg = new Config();
 		StormSubmitter.submitTopology("differentTopics", cfg, builder.createTopology());
